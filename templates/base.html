@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block head_title %}CustomNotes{% endblock %}</title>
+        {% include 'head/css.html' %}
+    </head>
+    <body class="antialiased dark:bg-gray-800">
+        <div class="sticky top-0">
+            {% include 'header.html' %} {% include 'navbar.html' %}
+        </div>
+        <script>
+            let themeIcon = document.querySelector('#theme-icon')
+            if (
+                localStorage.theme === 'dark' ||
+                (!('theme' in localStorage) &&
+                    window.matchMedia('(prefers-color-scheme: dark)').matches)
+            ) {
+                document.documentElement.classList.add('dark')
+                themeIcon.classList.add('fa-sun')
+            } else {
+                document.documentElement.classList.remove('dark')
+                themeIcon.classList.add('fa-moon')
+            }
+        </script>
+        <div class="container px-4 sm:px-0 sm:mx-auto mt-4 mb-16">
+            {% block content %}{% endblock %}
+        </div>
+        {% include 'head/js.html' %}
+    </body>
+</html>

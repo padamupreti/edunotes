@@ -1,0 +1,18 @@
+# vscode configurations
+.vscode/
+
+# Python virtual environment and npm packages
+venv/
+node_modules/
+
+# Python cache
+**/__pycache__
+
+# Temporary pretend CDN for collectstatic
+local-cdn/
+
+# Temporary test database
+db.sqlite3
+
+# Environment variables
+.env

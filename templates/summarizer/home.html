@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+<!-- Title Block -->
+{% block head_title %}CustomNotes | Home{% endblock %}
+
+<!-- Content Block -->
+{% block content %}
+<!-- Hero Section -->
+{% if user.is_anonymous %}
+<h1
+    class="text-3xl md:text-4xl lg:text-5xl text-center font-bold mb-2 dark:text-white"
+>
+    Create and share summarized notes!
+</h1>
+<p
+    class="text-md md:text-lg lg:text-xl text-center text-slate-500 dark:text-slate-400 my-7"
+>
+    Upload picutres of handwritten notes, handwritten scanned or typed PDFs and
+    create a singular summary on any study topic. You can add your own insights
+    and share your summarized note standalone or as part of collection.
+</p>
+<p
+    class="text-md md:text-lg lg:text-xl text-center text-slate-500 dark:text-slate-400 my-7"
+>
+    Share your knowledge today!
+</p>
+<div class="w-full flex justify-center">
+    <a
+        href="{% url 'authentication:login-or-register' %}"
+        class="text-md md:text-lg lg:text-xl p-3 rounded-full bg-black/90 text-white dark:bg-white/10 dark:text-gray-100 hover:opacity-90"
+        >Get Started <i class="fa fa-arrow-right"></i
+    ></a>
+</div>
+
+<hr class="my-10 border-0 h-px bg-gray-700/20 dark:bg-gray-300/20" />
+{% endif %}
+
+<!-- Browsing -->
+<h1 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 dark:text-white">
+    Popular Summaries
+</h1>
+<p class="md:text-md text-slate-500 dark:text-slate-400 mb-4">
+    Popular summaries in the past 24 hrs:
+</p>
+<h1 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 dark:text-white">
+    Popular Collections
+</h1>
+<p class="md:text-md text-slate-500 dark:text-slate-400 mb-4">
+    Popular collections in the past 24 hrs:
+</p>
+<h1 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 dark:text-white">
+    Popular Contributers
+</h1>
+<p class="md:text-md text-slate-500 dark:text-slate-400 mb-4">
+    Popular contributers in the past 24 hrs:
+</p>
+{% endblock %}

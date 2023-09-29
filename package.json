@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "buildtailwind": "tailwindcss -i static/tw/tw-input.css -o static/css/tailwind.css -m -w"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.5.6",
+        "tailwindcss": "^3.3.3"
+    }
+}

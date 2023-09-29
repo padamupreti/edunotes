@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% load tailwind_filters %}
+
+<!-- Head Block -->
+{% block head_title %}CustomNotes | Login/Sign Up{% endblock %}
+
+<!-- Content Block -->
+{% block content %}
+<div class="flex md:justify-evenly flex-wrap-reverse gap-2">
+    <div>
+        <h1 class="text-2xl font-bold mb-2 dark:text-white">Sign Up</h1>
+        <p class="text-slate-500 dark:text-slate-400 mb-2">
+            Sign up to create your new account on CustomNotes.
+        </p>
+        <form method="post">
+            {% csrf_token %} {{ sign_up_form|crispy }}
+            <input type="hidden" name="form_type" value="sign_up_form" />
+            <button
+                type="submit"
+                class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white font-bold px-3 py-2 rounded-md"
+            >
+                Sign Up
+            </button>
+        </form>
+    </div>
+    <hr
+        class="md:hidden border-0 h-px bg-slate-900/10 dark:bg-slate-300/10 my-5 w-full"
+    />
+    <div>
+        <h1 class="text-2xl font-bold mb-2 dark:text-white">Login</h1>
+        <p class="text-slate-500 dark:text-slate-400 mb-2">
+            Login with your username and password.
+        </p>
+        <form method="post">
+            {% csrf_token %} {{ login_form|crispy }}
+            <input type="hidden" name="form_type" value="login_form" />
+            <button
+                type="submit"
+                class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white font-bold px-3 py-2 rounded-md"
+            >
+                Login
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
