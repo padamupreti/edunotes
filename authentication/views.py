@@ -11,7 +11,7 @@ from .forms import EmailUserCreationForm
 def login_or_register(request):
     login_form = AuthenticationForm()
     sign_up_form = EmailUserCreationForm()
-    redirect_url = request.GET.get('next') or 'summarizer:home'
+    redirect_url = request.GET.get('next') or 'blog:home'
 
     post_data = request.POST
     if post_data:
@@ -45,4 +45,4 @@ def login_or_register(request):
 @login_required
 def logout_user(request):
     logout(request)
-    return redirect('summarizer:home')
+    return redirect('blog:home')

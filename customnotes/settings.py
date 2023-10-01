@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
-    'summarizer.apps.SummarizerConfig',
+    'blog.apps.BlogConfig',
     'crispy_forms',
     'fontawesomefree',
     'crispy_tailwind',
