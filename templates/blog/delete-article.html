@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+<!-- Title Block -->
+{% block head_title %}CustomNotes | Delete Article{% endblock %}
+
+<!-- Content Block -->
+{% block content %}
+<h1 class="text-2xl font-bold mb-2">Delete Article</h1>
+<p class="text-slate-500 dark:text-slate-400 mb-2">
+    Please note that deletion of article is an irrversible action.
+</p>
+<p class="mb-2"><span class="font-bold">Title: </span>{{ article.title }}</p>
+<p class="mb-2">
+    <span class="font-bold">Published On: </span>{{ article.published_on }}
+</p>
+<p class="mb-2">
+    <span class="font-bold">Likes: </span>{{ article.likes_count }}
+</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="bg-red-600 text-white px-3 py-2 rounded-md">
+        <i class="fa fa-trash"></i> Delete
+    </button>
+</form>
+{% endblock %}

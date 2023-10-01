@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load tailwind_filters %}
+
+<!-- Title Block -->
+{% block head_title %}CustomNotes | Create/Edit Collection{% endblock %}
+
+<!-- Content Block -->
+{% block content %}
+<h1 class="text-2xl font-bold mb-2">Create/Edit Collection</h1>
+<p class="text-slate-500 dark:text-slate-400 mb-2">
+    Create or Edit collection.
+</p>
+<form method="post">
+    {% csrf_token %} {{ form|crispy }}
+    <button
+        type="submit"
+        class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white font-bold px-3 py-2 rounded-md"
+    >
+        <i class="fa fa-floppy-disk"></i> Save
+    </button>
+</form>
+{% endblock %}

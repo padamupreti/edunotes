@@ -1,9 +1,25 @@
+[multiple] option {
+    border: none;
+    padding: 2px 0px;
+}
+
+[multiple] option:checked {
+    background-color: #d1d5db;
+}
+
+.dark [multiple] option:checked {
+    background-color: #374151;
+}
+
 .dark label,
 .dark small {
     color: #d1d5db;
 }
 
 .dark input[type='text'],
+.dark textarea,
+.dark select,
+.dark option,
 .dark input[type='password'],
 .dark input[type='email'],
 .dark input[type='date'] {

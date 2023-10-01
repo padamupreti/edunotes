@@ -131,6 +131,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom Configurations
 
+# Login URL
+LOGIN_URL = 'authentication:login-or-register'
+
 # Tailwind crispy forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
