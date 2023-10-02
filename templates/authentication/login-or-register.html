@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load tailwind_filters %}
 
 <!-- Head Block -->
-{% block head_title %}CustomNotes | Login/Sign Up{% endblock %}
+{% block head_title %}EduNotes | Login/Sign Up{% endblock %}
 
 <!-- Content Block -->
 {% block content %}
@@ -9,7 +9,7 @@
     <div>
         <h1 class="text-2xl font-bold mb-2">Sign Up</h1>
         <p class="text-slate-500 dark:text-slate-400 mb-2">
-            Sign up to create your new account on CustomNotes.
+            Sign up to create your new account on EduNotes.
         </p>
         <form method="post">
             {% csrf_token %} {{ sign_up_form|crispy }}
