@@ -1,8 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+
+from datetime import date
 
 from ..forms import CollectionForm
 from ..models import Collection, ArticleCollection
+from ..utils import add_likes, add_articles_likes
 
 
 @login_required
@@ -14,7 +18,7 @@ def create_collection(request):
             collection = form.save(commit=False)
             articles = form.cleaned_data.get('articles')
             collection.creator = request.user
-            collection.save(), pk
+            collection.save()
             for article in articles:
                 ArticleCollection.objects.create(
                     article=article, collection=collection)
@@ -29,6 +33,7 @@ def create_collection(request):
 
 def list_collections(request):
     collections = Collection.objects.all()
+    add_likes(collections)
 
     context = {
         'collections': collections
@@ -37,8 +42,10 @@ def list_collections(request):
     return render(request, 'blog/list-collections.html', context)
 
 
+@login_required
 def list_user_collections(request):
     collections = Collection.objects.filter(creator=request.user)
+    add_likes(collections)
 
     context = {
         'collections': collections
@@ -48,14 +55,65 @@ def list_user_collections(request):
 
 
 def collection_detail(request, pk):
-    return redirect('blog:list-articles')
+    collection = get_object_or_404(Collection, id=pk)
+    collections = Collection.objects.filter(
+        creator=collection.creator).exclude(id=collection.id)
+    add_articles_likes([collection])
+    add_likes(collections)
+
+    context = {
+        'collection': collection,
+        'other_collections': collections[:3]
+    }
+
+    return render(request, 'blog/collection-detail.html', context)
 
 
 @login_required
 def update_collection(request, pk):
-    return redirect('blog:list-articles')
+    collections = Collection.objects.filter(creator=request.user)
+    collection = get_object_or_404(collections, id=pk)
+    article_collections = ArticleCollection.objects.filter(
+        collection=collection).select_related('article')
+    form = CollectionForm(request.POST or None, instance=collection, initial={
+        'articles': [ac.article for ac in article_collections]
+    })
+
+    if request.method == 'POST':
+        if form.is_valid():
+            collection = form.save(commit=False)
+            collection.updated_on = date.today()
+            collection.save()
+            articles = form.cleaned_data.get('articles')
+            to_delete = [ac for ac in ArticleCollection.objects.filter(
+                collection=collection) if ac.article not in articles]
+            for ac in to_delete:
+                ac.delete()
+            for article in articles:
+                ArticleCollection.objects.get_or_create(
+                    article=article, collection=collection)
+            return redirect('blog:list-user-collections')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'blog/edit-collection.html', context)
 
 
 @login_required
 def delete_collection(request, pk):
-    return redirect('blog:list-articles')
+    collections = Collection.objects.filter(creator=request.user)
+    collection = get_object_or_404(collections, id=pk)
+
+    if request.method == 'POST':
+        collection.delete()
+        return redirect(reverse_lazy('blog:list-user-collections'))
+
+    add_likes([collection])
+
+    context = {
+        'collection': collection
+    }
+
+    return render(request, 'blog/delete-collection.html', context)

@@ -44,6 +44,7 @@ def list_articles(request):
     return render(request, 'blog/list-articles.html', context)
 
 
+@login_required
 def list_user_articles(request):
     articles = Article.objects.filter(author__user=request.user)
     add_topics_likes(articles)
