@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from datetime import date
 
 from ..forms import ArticleForm
-from ..models import Article, ArticleTopic, Author
+from ..models import Article, ArticleTopic, ArticleLike, Author
 from ..utils import add_topics_likes
 
 
@@ -61,6 +61,8 @@ def article_detail(request, pk):
     articles = Article.objects.filter(
         author=article.author).exclude(id=article.id)
     add_topics_likes([article])
+    article.user_liked = ArticleLike.objects.filter(
+        user=request.user, article=article).count() > 0
     add_topics_likes(articles)
 
     context = {

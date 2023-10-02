@@ -60,7 +60,7 @@ class CollectionLike(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{user.username}_likes_{collection}'
+        return f'{self.user.username}_likes_{self.collection}'
 
 
 class ArticleCollection(models.Model):

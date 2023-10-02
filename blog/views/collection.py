@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from datetime import date
 
 from ..forms import CollectionForm
-from ..models import Collection, ArticleCollection
+from ..models import Collection, CollectionLike, ArticleCollection
 from ..utils import add_likes, add_articles_likes
 
 
@@ -59,6 +59,8 @@ def collection_detail(request, pk):
     collections = Collection.objects.filter(
         creator=collection.creator).exclude(id=collection.id)
     add_articles_likes([collection])
+    collection.user_liked = CollectionLike.objects.filter(
+        user=request.user, collection=collection).count() > 0
     add_likes(collections)
 
     context = {

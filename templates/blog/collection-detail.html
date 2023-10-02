@@ -64,10 +64,24 @@
     </div>
 </a>
 {% endfor %}
-<button class="my-3 font-bold text-xl hover:text-red-600">
-    <i class="fa-regular fa-heart"></i>
-    {{ collection.likes_count }}
-</button>
+<div
+    hx-post="{% url 'blog:like-collection' collection.id %}"
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+    hx-trigger="click"
+    hx-swap="innerHTML"
+    class="inline-block"
+>
+    {% if collection.user_liked %}
+    <button class="my-3 font-bold text-md text-red-600">
+        <i class="fa-solid fa-heart"></i> Liked
+    </button>
+    {% else %}
+    <button class="my-3 font-bold text-md hover:text-red-600">
+        <i class="fa-regular fa-heart"></i>
+        Like
+    </button>
+    {% endif %}
+</div>
 {% if other_collections %}
 <h1 class="text-2xl font-bold mt-6 mb-2">More from {{ collection.creator }}</h1>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
