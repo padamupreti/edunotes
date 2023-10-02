@@ -6,7 +6,7 @@ from datetime import date
 
 from ..forms import CollectionForm
 from ..models import Collection, CollectionLike, ArticleCollection
-from ..utils import add_likes, add_articles_likes
+from ..utils import add_likes, add_articles_likes, filter_items
 
 
 @login_required
@@ -33,10 +33,14 @@ def create_collection(request):
 
 def list_collections(request):
     collections = Collection.objects.all().order_by('-created_on')
+    info = filter_items(request, collections)
+    collections = info['filtered_qs']
     add_likes(collections)
 
     context = {
-        'collections': collections
+        'collections': collections,
+        'query_text': info['query_text'],
+        'show_creator': True
     }
 
     return render(request, 'blog/list-collections.html', context)
@@ -46,10 +50,14 @@ def list_collections(request):
 def list_user_collections(request):
     collections = Collection.objects.filter(
         creator=request.user).order_by('-created_on')
+    info = filter_items(request, collections)
+    collections = info['filtered_qs']
     add_likes(collections)
 
     context = {
-        'collections': collections
+        'collections': collections,
+        'query_text': info['query_text'],
+        'show_creator': False
     }
 
     return render(request, 'blog/list-user-collections.html', context)
@@ -66,7 +74,10 @@ def collection_detail(request, pk):
 
     context = {
         'collection': collection,
-        'other_collections': collections[:3]
+        'articles': [ac.article for ac in collection.articles],
+        'show_author': True,
+        'collections': collections[:3],
+        'show_creator': True
     }
 
     return render(request, 'blog/collection-detail.html', context)

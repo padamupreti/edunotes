@@ -6,7 +6,7 @@ from datetime import date
 
 from ..forms import ArticleForm
 from ..models import Article, ArticleTopic, ArticleLike, Author
-from ..utils import add_topics_likes
+from ..utils import add_topics_likes, filter_items
 from ..summarizer import get_content_summary, has_adequate_length
 
 
@@ -35,10 +35,14 @@ def create_article(request):
 
 def list_articles(request):
     articles = Article.objects.all().order_by('-published_on')
+    info = filter_items(request, articles)
+    articles = info['filtered_qs']
     add_topics_likes(articles)
 
     context = {
-        'articles': articles
+        'articles': articles,
+        'query_text': info['query_text'],
+        'show_author': True
     }
 
     return render(request, 'blog/list-articles.html', context)
@@ -48,10 +52,14 @@ def list_articles(request):
 def list_user_articles(request):
     articles = Article.objects.filter(
         author__user=request.user).order_by('-published_on')
+    info = filter_items(request, articles)
+    articles = info['filtered_qs']
     add_topics_likes(articles)
 
     context = {
-        'articles': articles
+        'articles': articles,
+        'query_text': info['query_text'],
+        'show_author': False
     }
 
     return render(request, 'blog/list-user-articles.html', context)
@@ -69,7 +77,8 @@ def article_detail(request, pk):
 
     context = {
         'article': article,
-        'other_articles': articles[:3]
+        'articles': articles[:3],
+        'show_author': True
     }
 
     return render(request, 'blog/article-detail.html', context)

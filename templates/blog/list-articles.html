@@ -7,34 +7,9 @@
 {% block content %}
 <h1 class="text-2xl font-bold mb-2">Browse Articles</h1>
 {% if articles %}
-<!-- TODO add a search form here in flex with create new button -->
-{% for article in articles %}
-<a href="{% url 'blog:article-detail' article.id %}">
-    <div class="px-7 py-5 rounded-lg mt-4 mb-3 bg-gray-200 dark:bg-gray-700">
-        <h2 class="text-xl font-bold mb-2">{{ article.title }}</h2>
-        <div class="flex space-x-5 mb-2">
-            {% if article.author %}
-            <span><i class="fa fa-user"></i> {{ article.author }}</span>
-            {% else %}
-            <span><i class="fa fa-user"></i> Deleted User</span>
-            {% endif %}
-            <span
-                ><i class="fa fa-calendar"></i> {{ article.published_on }}</span
-            >
-            <span><i class="fa fa-heart"></i> {{ article.likes_count }}</span>
-        </div>
-        {% if article.topics %}
-        <div class="mt-4 mb-2">
-            {% for at in article.topics %}
-            <span
-                class="text-sm text-white bg-black/90 dark:bg-white/10 py-2 px-3 me-1 rounded-full"
-                >#{{ at.topic }}</span
-            >
-            {% endfor %}
-        </div>
-        {% endif %}
-    </div>
-</a>
-{% endfor %} {% else %}
+<!-- Include search form -->
+{% include 'parts/search-form.html' %}
+<!-- Include articles list -->
+{% include 'parts/list-articles.html' %} {% else %}
 <p class="text-slate-500 dark:text-slate-400 mb-2">No articles found.</p>
 {% endif %} {% endblock %}

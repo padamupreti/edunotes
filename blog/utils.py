@@ -22,3 +22,18 @@ def add_articles_likes(collections):
         add_topics_likes(articles)
         collection.articles = article_collections
     add_likes(collections)
+
+
+def filter_items(request, queryset):
+    query_params = request.GET
+    p_filter = query_params.get('filter')
+    p_query = query_params.get('query')
+
+    if p_query and not p_filter:
+        queryset = queryset.filter(title__icontains=p_query)
+    # TODO write else cases for advanced search
+
+    return {
+        'filtered_qs': queryset,
+        'query_text': p_query
+    }
