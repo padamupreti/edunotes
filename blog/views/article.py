@@ -7,6 +7,7 @@ from datetime import date
 from ..forms import ArticleForm
 from ..models import Article, ArticleTopic, ArticleLike, Author
 from ..utils import add_topics_likes
+from ..summarizer import get_content_summary, has_adequate_length
 
 
 @login_required
@@ -18,8 +19,7 @@ def create_article(request):
             article = form.save(commit=False)
             (author, _) = Author.objects.get_or_create(user=request.user)
             article.author = author
-            # TODO properly create content summary (huggingface transformers)
-            article.content_summary = 'random words here TODO to change'
+            article.content_summary = get_content_summary(article.content)
             article.save()
             input_topics = form.cleaned_data.get('topics')
             if input_topics:
@@ -62,6 +62,7 @@ def article_detail(request, pk):
     articles = Article.objects.filter(
         author=article.author).exclude(id=article.id).order_by('-published_on')
     add_topics_likes([article])
+    article.show_summary = has_adequate_length(article.content_summary)
     article.user_liked = ArticleLike.objects.filter(
         user=request.user, article=article).count() > 0
     add_topics_likes(articles)
@@ -85,8 +86,7 @@ def update_article(request, pk):
     if request.method == 'POST':
         if form.is_valid():
             article = form.save(commit=False)
-            # TODO properly create content summary (huggingface transformers)
-            article.content_summary = 'random words here TODO to change'
+            article.content_summary = get_content_summary(article.content)
             article.updated_on = date.today()
             article.save()
             input_topics = form.cleaned_data.get('topics')

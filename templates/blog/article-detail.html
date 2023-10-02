@@ -36,6 +36,11 @@
 <hr class="my-4 border-0 h-px bg-gray-700/20 dark:bg-gray-300/20" />
 {% endif %} {% if article.updated_on %}
 <p class="my-2 italic">Updated on: {{ article.updated_on }}</p>
+{% endif %} {% if article.show_summary %}
+<div class="my-4 p-3 rounded-md bg-slate-200 dark:bg-slate-600">
+    <p class="text-lg font-bold mb-2">Article Summary</p>
+    <p>{{ article.content_summary|safe }}</p>
+</div>
 {% endif %}
 <div class="text-slate-500 dark:text-slate-400 mb-2" id="article-content">
     {{ article.content|safe }}
