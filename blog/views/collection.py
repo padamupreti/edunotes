@@ -32,7 +32,7 @@ def create_collection(request):
 
 
 def list_collections(request):
-    collections = Collection.objects.all()
+    collections = Collection.objects.all().order_by('-created_on')
     add_likes(collections)
 
     context = {
@@ -44,7 +44,8 @@ def list_collections(request):
 
 @login_required
 def list_user_collections(request):
-    collections = Collection.objects.filter(creator=request.user)
+    collections = Collection.objects.filter(
+        creator=request.user).order_by('-created_on')
     add_likes(collections)
 
     context = {
@@ -57,7 +58,7 @@ def list_user_collections(request):
 def collection_detail(request, pk):
     collection = get_object_or_404(Collection, id=pk)
     collections = Collection.objects.filter(
-        creator=collection.creator).exclude(id=collection.id)
+        creator=collection.creator).exclude(id=collection.id).order_by('-created_on')
     add_articles_likes([collection])
     collection.user_liked = CollectionLike.objects.filter(
         user=request.user, collection=collection).count() > 0

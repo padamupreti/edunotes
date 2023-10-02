@@ -34,7 +34,7 @@ def create_article(request):
 
 
 def list_articles(request):
-    articles = Article.objects.all()
+    articles = Article.objects.all().order_by('-published_on')
     add_topics_likes(articles)
 
     context = {
@@ -46,7 +46,8 @@ def list_articles(request):
 
 @login_required
 def list_user_articles(request):
-    articles = Article.objects.filter(author__user=request.user)
+    articles = Article.objects.filter(
+        author__user=request.user).order_by('-published_on')
     add_topics_likes(articles)
 
     context = {
@@ -59,7 +60,7 @@ def list_user_articles(request):
 def article_detail(request, pk):
     article = get_object_or_404(Article, id=pk)
     articles = Article.objects.filter(
-        author=article.author).exclude(id=article.id)
+        author=article.author).exclude(id=article.id).order_by('-published_on')
     add_topics_likes([article])
     article.user_liked = ArticleLike.objects.filter(
         user=request.user, article=article).count() > 0
