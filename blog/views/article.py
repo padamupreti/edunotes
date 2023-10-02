@@ -6,7 +6,7 @@ from datetime import date
 
 from ..forms import ArticleForm
 from ..models import Article, ArticleTopic, ArticleLike, Author
-from ..utils import add_topics_likes, filter_items
+from ..utils import add_topics_likes, filter_articles
 from ..summarizer import get_content_summary, has_adequate_length
 
 
@@ -35,7 +35,7 @@ def create_article(request):
 
 def list_articles(request):
     articles = Article.objects.all().order_by('-published_on')
-    info = filter_items(request, articles)
+    info = filter_articles(request, articles)
     articles = info['filtered_qs']
     add_topics_likes(articles)
 
@@ -52,7 +52,7 @@ def list_articles(request):
 def list_user_articles(request):
     articles = Article.objects.filter(
         author__user=request.user).order_by('-published_on')
-    info = filter_items(request, articles)
+    info = filter_articles(request, articles)
     articles = info['filtered_qs']
     add_topics_likes(articles)
 

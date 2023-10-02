@@ -24,14 +24,34 @@ def add_articles_likes(collections):
     add_likes(collections)
 
 
-def filter_items(request, queryset):
+def filter_articles(request, queryset):
     query_params = request.GET
     p_filter = query_params.get('filter')
     p_query = query_params.get('query')
 
-    if p_query and not p_filter:
+    if p_query:
+        if not p_filter:
+            queryset = queryset.filter(title__icontains=p_query)
+        elif p_filter == 'topic':
+            article_topics = ArticleTopic.objects.filter(
+                topic__icontains=p_query)
+            queryset = [at.article for at in article_topics]
+        elif p_filter == 'author':
+            queryset = queryset.filter(
+                author__user__username__icontains=p_query)
+
+    return {
+        'filtered_qs': queryset,
+        'query_text': p_query if not p_filter else ''
+    }
+
+
+def filter_collections(request, queryset):
+    query_params = request.GET
+    p_query = query_params.get('query')
+
+    if p_query:
         queryset = queryset.filter(title__icontains=p_query)
-    # TODO write else cases for advanced search
 
     return {
         'filtered_qs': queryset,

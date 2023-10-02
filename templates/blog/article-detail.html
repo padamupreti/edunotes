@@ -64,14 +64,21 @@
     {% endif %}
 </div>
 {% if article.topics %}
-<div class="mt-4 mb-2">
+<div class="flex flex-wrap">
     {% for at in article.topics %}
-    <span
-        class="text-sm text-white bg-black/90 dark:bg-white/10 py-2 px-3 me-1 rounded-full"
-        >#{{ at.topic }}</span
+    <a
+        href="{% url 'blog:list-articles' %}?filter=topic&query={{ at.topic }}"
+        class="text-sm text-white bg-black/90 dark:bg-white/10 hover:text-opacity-80 py-2 px-3 me-1 mt-1 mb-2 rounded-full"
+        >#{{ at.topic }}</a
     >
     {% endfor %}
 </div>
 {% endif %} {% if articles %}
 <h1 class="text-2xl font-bold mt-6 mb-2">More from {{ article.author }}</h1>
-{% include 'parts/list-articles.html' %} {% endif %} {% endblock %}
+{% include 'parts/list-articles.html' %}
+<a
+    href="{% url 'blog:list-articles' %}?filter=author&query={{ article.author }}"
+    class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white px-3 py-2 rounded-md inline-block mt-3"
+    >View More <i class="fa fa-arrow-right"></i
+></a>
+{% endif %} {% endblock %}

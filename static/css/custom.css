@@ -53,3 +53,7 @@
     color: #fff;
     background-color: #1f2937;
 }
+
+.dark input::placeholder {
+    color: #94a3b8;
+}

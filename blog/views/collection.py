@@ -6,7 +6,7 @@ from datetime import date
 
 from ..forms import CollectionForm
 from ..models import Collection, CollectionLike, ArticleCollection
-from ..utils import add_likes, add_articles_likes, filter_items
+from ..utils import add_likes, add_articles_likes, filter_collections
 
 
 @login_required
@@ -33,7 +33,7 @@ def create_collection(request):
 
 def list_collections(request):
     collections = Collection.objects.all().order_by('-created_on')
-    info = filter_items(request, collections)
+    info = filter_collections(request, collections)
     collections = info['filtered_qs']
     add_likes(collections)
 
@@ -50,7 +50,7 @@ def list_collections(request):
 def list_user_collections(request):
     collections = Collection.objects.filter(
         creator=request.user).order_by('-created_on')
-    info = filter_items(request, collections)
+    info = filter_collections(request, collections)
     collections = info['filtered_qs']
     add_likes(collections)
 

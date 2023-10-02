@@ -2,23 +2,28 @@
 <a href="{% url 'blog:article-detail' article.id %}">
     <div class="px-7 py-5 rounded-lg mt-4 mb-3 bg-gray-200 dark:bg-gray-700">
         <h2 class="text-xl font-bold mb-2">{{ article.title }}</h2>
-        <div class="flex space-x-5 mb-2">
+        <div class="flex flex-wrap mb-2">
             {% if article.author %} {% if show_author %}
-            <span><i class="fa fa-user"></i> {{ article.author }}</span>
+            <span class="me-2"
+                ><i class="fa fa-user"></i> {{ article.author }}</span
+            >
             {% endif %} {% else %}
-            <span><i class="fa fa-user"></i> Deleted User</span>
+            <span class="me-2"><i class="fa fa-user"></i> Deleted User</span>
             {% endif %}
-            <span
+            <span class="me-2"
                 ><i class="fa fa-calendar"></i> {{ article.published_on }}</span
             >
-            <span><i class="fa fa-heart"></i> {{ article.likes_count }}</span>
+            <span class="me-2"
+                ><i class="fa fa-heart"></i> {{ article.likes_count }}</span
+            >
         </div>
         {% if article.topics %}
-        <div class="mt-4 mb-2">
+        <div class="flex flex-wrap">
             {% for at in article.topics %}
-            <span
-                class="text-sm text-white bg-black/90 dark:bg-white/10 py-2 px-3 me-1 rounded-full"
-                >#{{ at.topic }}</span
+            <a
+                href="{% url 'blog:list-articles' %}?filter=topic&query={{ at.topic }}"
+                class="text-sm text-white bg-black/90 dark:bg-white/10 hover:text-opacity-80 py-2 px-3 me-1 mt-1 mb-2 rounded-full"
+                >#{{ at.topic }}</a
             >
             {% endfor %}
         </div>
