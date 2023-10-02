@@ -11,7 +11,7 @@
     Electronics, Computer Science etc.)
 </p>
 <form method="post">
-    {% csrf_token %} {{ form|crispy }}
+    {% csrf_token %} {{ form.media }} {{ form|crispy }}
     <button
         type="submit"
         class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white font-bold px-3 py-2 rounded-md"

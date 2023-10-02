@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from ckeditor.fields import RichTextField
+
 from datetime import date
 
 
@@ -19,7 +21,7 @@ class Article(models.Model):
     author = models.ForeignKey(Author, null=True, on_delete=models.SET_NULL)
     published_on = models.DateField(default=date.today)
     updated_on = models.DateField(blank=True, null=True, default=None)
-    content = models.TextField()
+    content = RichTextField()
     content_summary = models.TextField()
 
     def __str__(self):

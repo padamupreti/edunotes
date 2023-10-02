@@ -100,7 +100,7 @@ def update_article(request, pk):
                         article=article, topic=topic)
             else:
                 ArticleTopic.objects.filter(article=article).delete()
-            return redirect('blog:list-user-articles')
+            return redirect('blog:article-detail', pk=article.id)
 
     context = {'form': form}
 

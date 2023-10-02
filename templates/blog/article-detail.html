@@ -5,7 +5,9 @@
 
 <!-- Content Block -->
 {% block content %}
-<h1 class="text-2xl font-bold mb-2">{{ article.title }}</h1>
+<h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
+    {{ article.title }}
+</h1>
 <div class="flex space-x-5 mb-2">
     {% if article.author %}
     <span><i class="fa fa-user"></i> {{ article.author }}</span>
@@ -35,7 +37,9 @@
 {% endif %} {% if article.updated_on %}
 <p class="my-2 italic">Updated on: {{ article.updated_on }}</p>
 {% endif %}
-<p class="text-slate-500 dark:text-slate-400 mb-2">{{ article.content }}</p>
+<div class="text-slate-500 dark:text-slate-400 mb-2" id="article-content">
+    {{ article.content|safe }}
+</div>
 <div
     hx-post="{% url 'blog:like-article' article.id %}"
     hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'

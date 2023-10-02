@@ -94,7 +94,7 @@ def update_collection(request, pk):
             for article in articles:
                 ArticleCollection.objects.get_or_create(
                     article=article, collection=collection)
-            return redirect('blog:list-user-collections')
+            return redirect('blog:collection-detail', pk=collection.id)
 
     context = {
         'form': form

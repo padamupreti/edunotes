@@ -1,3 +1,30 @@
+#article-content h1,
+#article-content h2,
+#article-content h3,
+#article-content h4,
+#article-content h5,
+#article-content h6 {
+    font-size: revert;
+    font-weight: revert;
+    margin: revert;
+    color: #000;
+}
+
+.dark #article-content h1,
+.dark #article-content h2,
+.dark #article-content h3,
+.dark #article-content h4,
+.dark #article-content h5,
+.dark #article-content h6 {
+    color: #fff;
+}
+
+#article-content p {
+    font-size: revert;
+    line-height: revert;
+    margin: revert;
+}
+
 [multiple] option {
     border: none;
     padding: 2px 0px;
