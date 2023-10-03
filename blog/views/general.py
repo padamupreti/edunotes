@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
-from ..models import Article, Collection, CollectionLike, Author, AuthorLike
-from ..utils import add_topics_likes, add_likes_author
+from ..models import Article, Collection, Author
+from ..utils import add_topics_likes, add_likes, add_likes_author
 from ..forms import AuthorForm
 
 # TODO modularize the code below in home
@@ -15,15 +15,13 @@ def home(request):
     articles = sorted(articles, key=lambda a: a.likes_count, reverse=True)
 
     collections = Collection.objects.all()
-    for collection in collections:
-        collection.likes_count = CollectionLike.objects.filter(
-            collection=collection).count()
+    add_likes(collections)
     collections = sorted(
         collections, key=lambda c: c.likes_count, reverse=True)
 
     authors = Author.objects.all()
     for author in authors:
-        author.likes_count = AuthorLike.objects.filter(author=author).count()
+        add_likes_author(author, request.user)
     authors = sorted(authors, key=lambda a: a.likes_count, reverse=True)
 
     context = {
