@@ -42,27 +42,21 @@
 <!-- Articles Section -->
 {% if articles %}
 <section>
-    <h1 class="text-lg md:text-xl lg:text-2xl font-bold my-3">
-        Most Liked Articles
-    </h1>
+    <h1 class="text-2xl font-bold mt-4 mb-2">Most Liked Articles</h1>
     {% include 'parts/list-articles.html' %}
 </section>
 {% endif %}
 <!-- Reading Lists Section -->
 {% if collections %}
 <section>
-    <h1 class="text-lg md:text-xl lg:text-2xl font-bold my-3">
-        Most Liked Reading Lists
-    </h1>
+    <h1 class="text-2xl font-bold mt-4 mb-2">Most Liked Reading Lists</h1>
     {% include 'parts/list-collections.html' %}
 </section>
 {% endif %}
 <!-- Authors Section -->
 {% if authors %}
 <section>
-    <h1 class="text-lg md:text-xl lg:text-2xl font-bold my-3">
-        Most Liked Authors
-    </h1>
+    <h1 class="text-2xl font-bold mt-4 mb-2">Most Liked Authors</h1>
     {% include 'parts/list-authors.html' %}
 </section>
 {% endif %} {% endblock %}

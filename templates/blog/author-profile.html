@@ -71,11 +71,11 @@
     {% endif %}
 </div>
 {% endif %} {% if articles %}
-<h1 class="text-2xl font-bold mb-2">Most Liked Articles</h1>
+<h1 class="text-2xl font-bold mt-4 mb-2">Most Liked Articles</h1>
 {% include 'parts/list-articles.html' %}
 <a
     href="{% url 'blog:list-articles' %}?filter=author&query={{ author }}"
-    class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white px-3 py-2 rounded-md inline-block mt-3"
+    class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white px-3 py-2 rounded-md inline-block"
     >View More <i class="fa fa-arrow-right"></i
 ></a>
 {% endif %} {% endblock %}
