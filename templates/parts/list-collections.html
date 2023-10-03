@@ -1,7 +1,7 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     {% for collection in collections %}
     <a href="{% url 'blog:collection-detail' collection.id %}">
-        <div class="px-7 py-5 rounded-lg bg-gray-200 dark:bg-gray-700 h-full">
+        <div class="px-4 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 h-full">
             <h2 class="text-xl font-bold mb-2">{{ collection.title }}</h2>
             <div class="flex flex-wrap mb-2">
                 {% if show_creator %}

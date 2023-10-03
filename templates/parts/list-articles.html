@@ -1,6 +1,6 @@
 {% for article in articles %}
 <a href="{% url 'blog:article-detail' article.id %}">
-    <div class="px-7 py-5 rounded-lg mt-4 mb-3 bg-gray-200 dark:bg-gray-700">
+    <div class="px-4 py-3 rounded-lg mb-3 bg-gray-200 dark:bg-gray-700">
         <h2 class="text-xl font-bold mb-2">{{ article.title }}</h2>
         <div class="flex flex-wrap mb-2">
             {% if article.author %} {% if show_author %}

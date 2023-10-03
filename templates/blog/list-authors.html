@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+<!-- Title Block -->
+{% block head_title %}EduNotes | Browse Authors{% endblock %}
+
+<!-- Content Block -->
+{% block content %}
+<h1 class="text-2xl font-bold mb-2">Browse Authors</h1>
+{% if authors %}
+<!-- Include search form -->
+{% include 'parts/search-form.html' %}
+<!-- Include list authors -->
+{% include 'parts/list-authors.html' %} {% else %}
+<p class="text-slate-500 dark:text-slate-400 mb-2">No authors found.</p>
+{% endif %} {% endblock %}

@@ -18,8 +18,11 @@
 </p>
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="bg-red-600 text-white px-3 py-2 rounded-md">
-        <i class="fa fa-trash"></i> Delete
+    <button
+        type="submit"
+        class="bg-black/90 dark:bg-white/10 text-white hover:bg-red-600 hover:dark:bg-red-600 font-bold px-3 py-2 rounded-md"
+    >
+        Delete Article
     </button>
 </form>
 {% endblock %}

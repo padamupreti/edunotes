@@ -46,6 +46,10 @@ def filter_articles(request, queryset):
         elif p_filter == 'author':
             queryset = queryset.filter(
                 author__user__username__icontains=p_query)
+    elif p_filter == 'liked':
+        article_likes = ArticleLike.objects.filter(user=request.user)
+        articles = [al.article for al in article_likes]
+        queryset = articles
 
     return {
         'filtered_qs': queryset,
@@ -55,10 +59,36 @@ def filter_articles(request, queryset):
 
 def filter_collections(request, queryset):
     query_params = request.GET
+    p_filter = query_params.get('filter')
     p_query = query_params.get('query')
 
     if p_query:
-        queryset = queryset.filter(title__icontains=p_query)
+        if not p_filter:
+            queryset = queryset.filter(title__icontains=p_query)
+    elif p_filter == 'liked':
+        collection_likes = CollectionLike.objects.filter(user=request.user)
+        collections = [cl.collection for cl in collection_likes]
+        queryset = collections
+
+    return {
+        'filtered_qs': queryset,
+        'query_text': p_query
+    }
+
+
+def filter_authors(request, queryset):
+    query_params = request.GET
+    p_filter = query_params.get('filter')
+    p_query = query_params.get('query')
+
+    if p_query:
+        if not p_filter:
+            queryset = queryset.filter(
+                user__username__icontains=p_query)
+    elif p_filter == 'liked':
+        author_likes = AuthorLike.objects.filter(user=request.user)
+        authors = [al.author for al in author_likes]
+        queryset = authors
 
     return {
         'filtered_qs': queryset,

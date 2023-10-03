@@ -5,46 +5,50 @@
 
 <!-- Content Block -->
 {% block content %}
-<!-- Hero Section -->
-{% if user.is_anonymous %}
+<!-- TODO to restore later if user.is_anonymous -->
 <h1 class="text-3xl md:text-4xl lg:text-5xl text-center font-bold mb-2">
-    Create educational articles on various topics on EduNotes!
+    Create educational articles on EduNotes!
 </h1>
 <p
     class="text-md md:text-lg lg:text-xl text-center text-slate-500 dark:text-slate-400 my-7"
 >
-    Welcome to EduNotes educational blog. Create and share articles and article
-    collections today!
+    Welcome to EduNotes educational blog for learners and knowledge sharers.
+    Create and share articles and article collections today!
 </p>
 <p
     class="text-md md:text-lg lg:text-xl text-center text-slate-500 dark:text-slate-400 my-7"
 >
     TODO add advanced search
 </p>
-<div class="w-full flex justify-center">
-    <a
-        href="{% url 'authentication:login-or-register' %}"
-        class="text-md md:text-lg lg:text-xl p-3 rounded-full bg-black/90 text-white dark:bg-white/10 dark:text-gray-100 hover:opacity-90"
-        >Get Started <i class="fa fa-arrow-right"></i
-    ></a>
-</div>
 
 <hr class="my-10 border-0 h-px bg-gray-700/20 dark:bg-gray-300/20" />
-{% endif %}
+<!-- endif -->
 
 <!-- Browsing -->
-<h1 class="text-lg md:text-xl lg:text-2xl font-bold mb-2">Popular Articles</h1>
-<p class="md:text-md text-slate-500 dark:text-slate-400 mb-4">
-    Popular articles in the past 24 hrs:
-</p>
-<h1 class="text-lg md:text-xl lg:text-2xl font-bold mb-2">
-    Popular Collections
-</h1>
-<p class="md:text-md text-slate-500 dark:text-slate-400 mb-4">
-    Popular collections in the past 24 hrs:
-</p>
-<h1 class="text-lg md:text-xl lg:text-2xl font-bold mb-2">Popular Authors</h1>
-<p class="md:text-md text-slate-500 dark:text-slate-400 mb-4">
-    Popular authors in the past 24 hrs:
-</p>
-{% endblock %}
+<!-- Articles Section -->
+{% if articles %}
+<section>
+    <h1 class="text-lg md:text-xl lg:text-2xl font-bold my-3">
+        Most Liked Articles
+    </h1>
+    {% include 'parts/list-articles.html' %}
+</section>
+{% endif %}
+<!-- Collections Section -->
+{% if collections %}
+<section>
+    <h1 class="text-lg md:text-xl lg:text-2xl font-bold my-3">
+        Most Liked Collections
+    </h1>
+    {% include 'parts/list-collections.html' %}
+</section>
+{% endif %}
+<!-- Authors Section -->
+{% if authors %}
+<section>
+    <h1 class="text-lg md:text-xl lg:text-2xl font-bold my-3">
+        Most Liked Authors
+    </h1>
+    {% include 'parts/list-authors.html' %}
+</section>
+{% endif %} {% endblock %}
