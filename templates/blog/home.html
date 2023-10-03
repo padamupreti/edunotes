@@ -44,6 +44,11 @@
 <section>
     <h1 class="text-2xl font-bold mt-4 mb-2">Most Liked Articles</h1>
     {% include 'parts/list-articles.html' %}
+    <a
+        href="{% url 'blog:list-articles' %}"
+        class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white px-3 py-2 rounded-md inline-block"
+        >View More <i class="fa fa-arrow-right"></i
+    ></a>
 </section>
 {% endif %}
 <!-- Reading Lists Section -->
@@ -51,6 +56,11 @@
 <section>
     <h1 class="text-2xl font-bold mt-4 mb-2">Most Liked Reading Lists</h1>
     {% include 'parts/list-collections.html' %}
+    <a
+        href="{% url 'blog:list-collections' %}"
+        class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white px-3 py-2 rounded-md inline-block"
+        >View More <i class="fa fa-arrow-right"></i
+    ></a>
 </section>
 {% endif %}
 <!-- Authors Section -->
@@ -58,5 +68,10 @@
 <section>
     <h1 class="text-2xl font-bold mt-4 mb-2">Most Liked Authors</h1>
     {% include 'parts/list-authors.html' %}
+    <a
+        href="{% url 'blog:list-authors' %}"
+        class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white px-3 py-2 rounded-md inline-block"
+        >View More <i class="fa fa-arrow-right"></i
+    ></a>
 </section>
 {% endif %} {% endblock %}

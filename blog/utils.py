@@ -65,6 +65,9 @@ def filter_collections(request, queryset):
     if p_query:
         if not p_filter:
             queryset = queryset.filter(title__icontains=p_query)
+        elif p_filter == 'creator':
+            queryset = queryset.filter(
+                creator__username__icontains=p_query)
     elif p_filter == 'liked':
         collection_likes = CollectionLike.objects.filter(user=request.user)
         collections = [cl.collection for cl in collection_likes]

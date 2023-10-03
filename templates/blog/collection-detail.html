@@ -90,4 +90,10 @@
 </div>
 {% if collections %}
 <h1 class="text-2xl font-bold mt-4 mb-2">More from {{ collection.creator }}</h1>
-{% include 'parts/list-collections.html' %} {% endif %} {% endblock %}
+{% include 'parts/list-collections.html' %}
+<a
+    href="{% url 'blog:list-collections' %}?filter=creator&query={{ collection.creator }}"
+    class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white px-3 py-2 rounded-md inline-block"
+    >View More <i class="fa fa-arrow-right"></i
+></a>
+{% endif %} {% endblock %}
