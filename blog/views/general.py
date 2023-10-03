@@ -42,11 +42,17 @@ def author_profile(request, pk):
     add_topics_likes(articles)
     articles = sorted(articles, key=lambda a: a.likes_count, reverse=True)
 
+    collections = Collection.objects.filter(creator=author.user)
+    add_likes(collections)
+    collections = sorted(
+        collections, key=lambda c: c.likes_count, reverse=True)
+
     add_likes_author(author, request.user)
 
     context = {
         'author': author,
-        'articles': articles[:3]
+        'articles': articles[:3],
+        'collections': collections[:3]
     }
 
     return render(request, 'blog/author-profile.html', context)
