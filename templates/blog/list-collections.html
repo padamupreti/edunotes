@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 <!-- Title Block -->
-{% block head_title %}EduNotes | Browse Collections{% endblock %}
+{% block head_title %}EduNotes | Browse Reading Lists{% endblock %}
 
 <!-- Content Block -->
 {% block content %}
-<h1 class="text-2xl font-bold mb-2">Browse Collections</h1>
+<h1 class="text-2xl font-bold mb-2">Browse Reading Lists</h1>
 {% if collections %}
 <!-- Include search form -->
 {% include 'parts/search-form.html' %}
-<!-- Include list collections -->
+<!-- Include reading lists -->
 {% include 'parts/list-collections.html' %} {% else %}
-<p class="text-slate-500 dark:text-slate-400 mb-2">No collections found.</p>
+<p class="text-slate-500 dark:text-slate-400 mb-2">No reading lists found.</p>
 {% endif %} {% endblock %}

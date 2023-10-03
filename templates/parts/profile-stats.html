@@ -1,6 +1,6 @@
 <h1 class="text-2xl font-bold mb-2">Quick Links</h1>
 <p class="text-slate-500 dark:text-slate-400 mb-2">
-    View my articles and collections or create new.
+    View my articles and reading lists or create new.
 </p>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-3 mb-2">
     <a href="{% url 'blog:list-user-articles' %}">
@@ -13,14 +13,14 @@
     <a href="{% url 'blog:list-user-collections' %}">
         <div class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700">
             <h2 class="text-xl font-bold mb-2">
-                My Collections <i class="fa fa-arrow-right"></i>
+                My Reading Lists <i class="fa fa-arrow-right"></i>
             </h2>
         </div>
     </a>
 </div>
 <h1 class="text-2xl font-bold mb-2">Likes</h1>
 <p class="text-slate-500 dark:text-slate-400 mb-2">
-    View my liked articles, collections and authors.
+    View my liked articles, reading lists and authors.
 </p>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-3 mb-2">
     <a href="{% url 'blog:list-articles' %}?filter=liked">
@@ -34,7 +34,7 @@
     <a href="{% url 'blog:list-collections' %}?filter=liked">
         <div class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700">
             <h2 class="text-xl font-bold mb-2">
-                <i class="fa fa-heart"></i> Liked Collections
+                <i class="fa fa-heart"></i> Liked Reading Lists
                 <i class="fa fa-arrow-right"></i>
             </h2>
         </div>

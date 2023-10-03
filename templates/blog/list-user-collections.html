@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 <!-- Title Block -->
-{% block head_title %}EduNotes | My Collections{% endblock %}
+{% block head_title %}EduNotes | My Reading Lists{% endblock %}
 
 <!-- Content Block -->
 {% block content %}
-<h1 class="text-2xl font-bold">My Collections</h1>
+<h1 class="text-2xl font-bold">My Reading Lists</h1>
 <a
     href="{% url 'blog:create-collection' %}"
     class="bg-black/90 dark:bg-white/10 hover:opacity-80 text-white font-bold px-3 py-2 inline-block my-4 rounded-md"
@@ -15,9 +15,9 @@
 {% if collections %}
 <!-- Include search form -->
 {% include 'parts/search-form.html' %}
-<!-- Include list collections -->
+<!-- Include reading lists -->
 {% include 'parts/list-collections.html' %} {% else %}
 <p class="text-slate-500 dark:text-slate-400 mb-2">
-    You have not created any collections yet.
+    You have not created any reading lists yet.
 </p>
 {% endif %} {% endblock %}

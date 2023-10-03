@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 <!-- Title Block -->
-{% block head_title %}EduNotes | Delete Collection{% endblock %}
+{% block head_title %}EduNotes | Delete Reading List{% endblock %}
 
 <!-- Content Block -->
 {% block content %}
-<h1 class="text-2xl font-bold mb-2">Delete Collection</h1>
+<h1 class="text-2xl font-bold mb-2">Delete Reading List</h1>
 <p class="text-slate-500 dark:text-slate-400 mb-2">
-    Please note that deletion of collection is an irrversible action.
+    Please note that deletion of reading list is an irrversible action.
 </p>
 <p class="mb-2"><span class="font-bold">Title: </span>{{ collection.title }}</p>
 <p class="mb-2">
@@ -22,7 +22,7 @@
         type="submit"
         class="bg-black/90 dark:bg-white/10 text-white hover:bg-red-600 hover:dark:bg-red-600 font-bold px-3 py-2 rounded-md"
     >
-        Delete Collection
+        Delete Reading List
     </button>
 </form>
 {% endblock %}

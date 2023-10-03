@@ -1,13 +1,13 @@
 {% extends 'base.html' %} {% load tailwind_filters %}
 
 <!-- Title Block -->
-{% block head_title %}EduNotes | Create/Edit Collection{% endblock %}
+{% block head_title %}EduNotes | Create/Edit Reading List{% endblock %}
 
 <!-- Content Block -->
 {% block content %}
-<h1 class="text-2xl font-bold mb-2">Create/Edit Collection</h1>
+<h1 class="text-2xl font-bold mb-2">Create/Edit Reading List</h1>
 <p class="text-slate-500 dark:text-slate-400 mb-2">
-    Create or Edit collection.
+    Create or Edit reading list.
 </p>
 <form method="post">
     {% csrf_token %} {{ form|crispy }}
