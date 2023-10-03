@@ -1,4 +1,4 @@
-# edunotes
+# EduNotes
 
 Educational blogging platform built with [Django](https://www.djangoproject.com/ 'Django Website'). Uses
 [Tailwind CSS](https://tailwindcss.com/ 'Tailwind CSS Website') and
@@ -16,7 +16,7 @@ First clone the repository. Then, to install dependencies, navigate to project r
 pip install -r requirements.txt
 ```
 
-edunotes uses [Natural Language Toolkit](https://www.nltk.org/ 'NLTK Website') tokenizer and stopwords. These
+EduNotes uses [Natural Language Toolkit](https://www.nltk.org/ 'NLTK Website') tokenizer and stopwords. These
 need to be downloaded. To do this, invoke Python shell from the terminal with `python` or `python3` command and run the
 following:
 
