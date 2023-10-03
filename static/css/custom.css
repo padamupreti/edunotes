@@ -1,3 +1,7 @@
+#top-div {
+    z-index: 100;
+}
+
 #article-content h1,
 #article-content h2,
 #article-content h3,
@@ -23,6 +27,10 @@
     font-size: revert;
     line-height: revert;
     margin: revert;
+}
+
+.alert .border {
+    border-radius: 0.5rem;
 }
 
 [multiple] option {
