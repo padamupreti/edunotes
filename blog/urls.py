@@ -3,7 +3,7 @@ from django.urls import path
 from .views.general import home
 from .views.article import create_article, list_articles, list_user_articles, article_detail, update_article, delete_article
 from .views.collection import create_collection, list_collections, list_user_collections, collection_detail, update_collection, delete_collection
-from .views.like import like_article, like_collection
+from .views.like import like_article, like_collection, like_author
 
 app_name = 'blog'
 urlpatterns = [
@@ -27,5 +27,6 @@ urlpatterns = [
          delete_collection, name='delete-collection'),
     # Likes
     path('like/articles/<int:pk>/', like_article, name='like-article'),
-    path('like/collections/<int:pk>/', like_collection, name='like-collection')
+    path('like/collections/<int:pk>/', like_collection, name='like-collection'),
+    path('like/authors/<int:pk>/', like_author, name='like-author')
 ]

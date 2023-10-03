@@ -9,11 +9,17 @@ from datetime import date
 class Author(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True, default=None)
-    rating = models.IntegerField(
-        choices=[(i, i) for i in range(1, 6)], blank=True, null=True, default=None)
 
     def __str__(self):
         return self.user.username
+
+
+class AuthorLike(models.Model):
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user.username}_likes_{self.author}'
 
 
 class Article(models.Model):

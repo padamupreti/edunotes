@@ -1,4 +1,4 @@
-from .models import ArticleTopic, ArticleLike, CollectionLike, ArticleCollection
+from .models import ArticleTopic, ArticleLike, CollectionLike, ArticleCollection, AuthorLike
 
 
 def add_topics_likes(articles):
@@ -22,6 +22,13 @@ def add_articles_likes(collections):
         add_topics_likes(articles)
         collection.articles = article_collections
     add_likes(collections)
+
+
+def add_likes_author(author, user):
+    if author:
+        author_likes = AuthorLike.objects.filter(author=author)
+        author.likes_count = author_likes.count()
+        author.user_liked = author_likes.filter(user=user).count() > 0
 
 
 def filter_articles(request, queryset):

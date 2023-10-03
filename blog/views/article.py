@@ -6,7 +6,7 @@ from datetime import date
 
 from ..forms import ArticleForm
 from ..models import Article, ArticleTopic, ArticleLike, Author
-from ..utils import add_topics_likes, filter_articles
+from ..utils import add_topics_likes, filter_articles, add_likes_author
 from ..summarizer import get_content_summary, has_adequate_length
 
 
@@ -69,6 +69,7 @@ def article_detail(request, pk):
     article = get_object_or_404(Article, id=pk)
     articles = Article.objects.filter(
         author=article.author).exclude(id=article.id).order_by('-published_on')
+    add_likes_author(article.author, request.user)
     add_topics_likes([article])
     article.show_summary = has_adequate_length(article.content_summary)
     article.user_liked = ArticleLike.objects.filter(
