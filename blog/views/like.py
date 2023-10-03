@@ -1,13 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponse
 
+from authentication.decorators import login_required_htmx
 from ..models import Article, ArticleLike, Collection, CollectionLike, Author, AuthorLike
 
 # TODO modularize functions in this file
 
 
-@login_required
+@login_required_htmx
 def like_article(request, pk):
     if request.method == 'GET':
         raise Http404
@@ -27,7 +27,7 @@ def like_article(request, pk):
     return HttpResponse(response_string)
 
 
-@login_required
+@login_required_htmx
 def like_collection(request, pk):
     if request.method == 'GET':
         raise Http404
@@ -47,7 +47,7 @@ def like_collection(request, pk):
     return HttpResponse(response_string)
 
 
-@login_required
+@login_required_htmx
 def like_author(request, pk):
     if request.method == 'GET':
         raise Http404

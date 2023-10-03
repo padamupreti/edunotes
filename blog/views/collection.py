@@ -69,7 +69,7 @@ def collection_detail(request, pk):
         creator=collection.creator).exclude(id=collection.id).order_by('-created_on')
     add_articles_likes([collection])
     collection.user_liked = CollectionLike.objects.filter(
-        user=request.user, collection=collection).count() > 0
+        user=request.user, collection=collection).count() > 0 if request.user.is_authenticated else False
     add_likes(collections)
 
     context = {

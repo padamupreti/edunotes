@@ -73,7 +73,7 @@ def article_detail(request, pk):
     add_topics_likes([article])
     article.show_summary = has_adequate_length(article.content_summary)
     article.user_liked = ArticleLike.objects.filter(
-        user=request.user, article=article).count() > 0
+        user=request.user, article=article).count() > 0 if request.user.is_authenticated else False
     add_topics_likes(articles)
 
     context = {

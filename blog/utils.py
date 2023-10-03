@@ -28,7 +28,8 @@ def add_likes_author(author, user):
     if author:
         author_likes = AuthorLike.objects.filter(author=author)
         author.likes_count = author_likes.count()
-        author.user_liked = author_likes.filter(user=user).count() > 0
+        author.user_liked = author_likes.filter(
+            user=user).count() > 0 if user.is_authenticated else False
 
 
 def filter_articles(request, queryset):
