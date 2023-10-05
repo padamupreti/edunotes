@@ -4,7 +4,7 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from nltk.probability import FreqDist
 
-from math import ceil
+from math import floor
 
 
 def get_non_stopwords(sentence):
@@ -35,7 +35,7 @@ def get_content_summary(article_content):
         return sentence_rank
 
     ranked_sentences = sorted(sentences, key=sentence_ranker, reverse=True)
-    summary_sentences = ceil(len(sentences) * 0.2)
+    summary_sentences = min(floor(len(sentences) * 0.2), 4)
     summarized_text = ' '.join(ranked_sentences[:summary_sentences])
     return summarized_text
 
