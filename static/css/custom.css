@@ -2,6 +2,15 @@
     z-index: 100;
 }
 
+#article-content {
+    overflow-x: scroll;
+}
+
+#article-content img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
 #article-content h1,
 #article-content h2,
 #article-content h3,
